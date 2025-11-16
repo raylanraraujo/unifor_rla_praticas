@@ -7,8 +7,9 @@ for (let i = 0; i < n; i++){
     vetorps[i] = parseInt(prompt("Digite um elemento: "));
 }
 
+// aqui começa de fato a pesquisa simples
 let x = parseInt(prompt("Digite o número a ser procurado: "));
-let pos = -1;
+let pos = -1; //
 
 for (let i = 0; i < n; i++){
     if(vetorps[i] == x){
