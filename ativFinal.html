@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let alunos = [];   
+    let medias = [];
+    let mediasOrdenadas = [];
+    let aprovados = 0;
+    //saber a quantidade de alunos
+    let quantidadeAlunos = parseInt(prompt("Digite a quantidade de alunos"));
+    
+    document.write("<pre>");
+    document.write(`nº    Nome \t\t Av1 \t\t AV2 \t\t Média final \t\t Situação <br><br>`);
+    for(let i = 0; i < quantidadeAlunos; i++){
+        aluno = prompt(`Nome do aluno ${i+1}`);
+        alunos.push(aluno);
+        let av1 = [];
+        let av2 = [];
+        
+        //loop para as notas AV1
+        for(let j=0; j < 2; j++){
+            let nota = parseFloat(prompt("Digite AV1 nota " + (j+1)));
+                av1.push(nota);
+        }
+
+        //loop para notas AV2
+        for(let k=0; k < 2; k++){
+            let nota = parseFloat(prompt("Digite AV2 nota " + (k+1)));
+            av2.push(nota);
+        }
+
+        alert(`Aluno ${i+1} cadastrado com sucesso.`)
+
+        //inclusao no vetor de média dos alunos
+        medias.push((calcularMedia(av1)+calcularMedia(av2))/2)
+
+        let mediaAv1 = calcularMedia(av1);
+        let mediaAv2 = calcularMedia(av2);
+        let mediaFinal = calcularMediaFinal(av1, av2);
+        
+        let situacao;
+        if (mediaFinal > 5){
+            situacao = "Aprovado";
+            aprovados++;
+        } else {
+            situacao = "Reprovado";
+        }
+
+        document.write(`${(i+1)}     ${aluno} \t\t ${mediaAv1} \t\t ${mediaAv2} \t\t\t ${mediaFinal} \t\t ${situacao}`)
+        document.write("<pre>");
+    }
+            
+    document.write(`<br>Listaa de alunos: ${alunos} <br>`)
+    document.write(`Lista das médias: ${medias} <br>`)
+    document.write(`Médias ordendas: ${ordenarMedias(medias)} <br>`)
+    document.write(`Total aprovados: ${aprovados} <br>`)
+
+///
+        function calcularMediaFinal(notasAv1, notasAv2){
+            let somaNotas = 0;
+            for(let notaAv1 of notasAv1){
+                somaNotas += notaAv1;
+            }
+            for(let notaAv2 of notasAv2){
+                somaNotas += notaAv2;
+            }
+            return somaNotas/4;
+        }
+///
+
+///
+        function calcularMedia(array){
+            let somaNotas = 0;
+            for(let nota of array){
+                somaNotas += nota;
+            }
+            return somaNotas/2;
+        }
+///
+
+
+////
+function ordenarMedias(array){
+    let comprimento = array.length; // usado para saber o comprimento do vetor
+
+    for(let l = 0; l < comprimento; l++) { //um laço 
+        for(m= 0 ; m < (comprimento - l - 1); m++){
+            if (array[m] > array[m+1]){
+               aux = array[m];
+               array[m] = array[m+1];
+               array[m+1] = aux; 
+            }
+        }
+    }
+    return array;
+}
+////
+    
+</script>
+</html>
