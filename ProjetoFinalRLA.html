@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+ATIVIDADE FINAL - RACIOCINIO LÓGICO ALGORITMICO
+
+Nome: Isabelle Martins de Moraes Ramalho  │ Matricula: 2524835
+Nome: Janailson Alves Santos              │ Matricula: 2524944
+Nome: Kairon Lucas Ferreira Dutra         │ Matricula: 2524909
+Nome: Marcos Aurelio Ribeiro de Sousa     │ Matricula: 2524906
+Nome: Raylan da Rocha Araujo              │ Matricula: 2526723
+
+Este programa lê as notas de uma turma, calcula as médias,
+ordena em ordem crescente usando o método bolha e exibe a
+quantidade de alunos aprovados e reprovados.
+*/
+
+let medias = [];
+let nota1 = [];
+let nota2 = [];
+let quantidade_aluno = parseInt(prompt("Digite o número de alunos: "));
+
+// verifica se o usuario coloca valores inválidos (zero e valores negativos)
+if (quantidade_aluno <= 0) {
+    alert("Insira um valor válido.");
+}
+// coletar as notas e por as médias no vetor
+for (let i = 0; i < quantidade_aluno; i++) {
+    let n1;
+    let n2;
+
+    do {
+      n1 = parseFloat(prompt(`Informe a primeira nota do aluno ${i + 1}: `));
+      if (isNaN(n1) || n1 < 0 || n1 > 10) {
+            alert("Erro: as notas devem ser números entre 0-10.");
+      }
+    } while (isNaN(n1) || n1 < 0 || n1 > 10)
+
+    do {
+      n2 = parseFloat(prompt(`Informe a segunda nota do aluno ${i + 1}: `));
+      if (isNaN(n2) || n2 < 0 || n2 > 10) {
+          alert("Erro: as notas devem ser números entre 0-10.");
+      }
+    } while (isNaN(n2) || n2 < 0 || n2 > 10)
+
+    nota1[i] = n1;
+    nota2[i] = n2;
+    medias[i] = (n1 + n2) / 2;
+}
+
+// método pra organizar as médias (bolha)
+function bolha(medias) {
+  for (let passo = 0; passo < medias.length - 1; passo++) {
+    for (let posicao_atual = 0; posicao_atual < medias.length - passo - 1; posicao_atual++) {
+      if (medias[posicao_atual] > medias[posicao_atual + 1]) {
+        let temp = medias[posicao_atual];
+        medias[posicao_atual] = medias[posicao_atual + 1];
+        medias[posicao_atual + 1] = temp;
+      }
+    }
+  }
+  return medias;
+}
+
+let medias_organizada = bolha(medias);
+
+// método para contar quantos alunos foram aprovados e reprovados
+let aprovados = 0;
+let reprovados = 0;
+
+for (let atual = 0; atual < medias.length; atual++) {
+  if (medias[atual] > 5) {
+    aprovados++;
+  } else {
+    reprovados++;
+  }
+}
+
+// mostra os resultados
+document.open()
+document.write(`Médias ${medias_organizada}<br>`);
+document.write(`Quantidade de Alunos Aprovados ${aprovados}<br>`);
+document.write(`Quantidade de Alunos Reprovados ${reprovados}`);
+document.close()
+</script>
+</html>
